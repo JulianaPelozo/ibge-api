@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brasil em Números — IBGE</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <div class="header-inner">
+      <div class="logo-area">
+        <div class="eyebrow">API IBGE · Censo Demográfico</div>
+        <h1>Brasil em <span>Números</span></h1>
+      </div>
+      <div class="header-meta">
+        Fonte: <strong>api.ibge.gov.br</strong><br>
+        Dados do Censo 2022
+      </div>
+    </div>
+  </header>
+
+  <div class="controls">
+    <div class="select-wrapper">
+      <select id="selectEstado">
+        <option value="">— Selecione um estado —</option>
+      </select>
+    </div>
+    <button class="btn-buscar" id="btnBuscar" disabled onclick="buscarDados()">BUSCAR</button>
+    <div class="loading" id="loading">
+      <div class="spinner"></div>
+      <span>Consultando API do IBGE...</span>
+    </div>
+  </div>
+
+  <div class="error-msg" id="errorMsg"></div>
+
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card">
+      <div class="stat-label">Total de Municípios</div>
+      <div class="stat-value" id="statMunicipios">—</div>
+      <div class="stat-sub">no estado selecionado</div>
+    </div>
+    <div class="stat-card orange">
+      <div class="stat-label">Maior Município</div>
+      <div class="stat-value" id="statMaior" style="font-size:1.3rem">—</div>
+      <div class="stat-sub" id="statMaiorPop">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Capital do Estado</div>
+      <div class="stat-value" id="statCapital" style="font-size:1.3rem">—</div>
+      <div class="stat-sub" id="statUF">—</div>
+    </div>
+  </div>
+
+  <div class="table-wrapper" id="tableWrapper">
+    <div class="table-header">
+      <div class="section-title">Municípios</div>
+      <input
+        class="search-input"
+        type="text"
+        id="searchInput"
+        placeholder="Filtrar município..."
+        oninput="filtrarTabela()"
+      />
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Município</th>
+          <th>Mesorregião</th>
+          <th>População</th>
+        </tr>
+      </thead>
+      <tbody id="tabelaBody"></tbody>
+    </table>
+    <div class="pagination" id="pagination"></div>
+  </div>
+
+  <!-- Estado vazio -->
+  <div class="empty-state" id="emptyState">
+    <div class="empty-icon">🗺️</div>
+    <p>Selecione um estado acima para explorar os dados populacionais</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="container">
+    Dados via <a href="https://servicodados.ibge.gov.br/api/docs" target="_blank">servicodados.ibge.gov.br</a>
+    · Projeto de exemplo com API pública
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
